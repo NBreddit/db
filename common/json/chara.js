@@ -47,7 +47,7 @@ window.chara=[
     "hit0": "1",
     "skill1": "Evil Wind Shuriken: Shadow Windmill",
     "skill1desc": "2.2x ATK in HRT damage to all enemies in range.",
-    "skill1pvp": "2.2x ATK in HRT damage to all enemies in range.",
+    "skill1pvp": "test",
     "target1": "2",
     "hit1": "4",
     "skill2": "",

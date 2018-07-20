@@ -180,7 +180,7 @@
 		background-image: linear-gradient(to bottom, #fffefb, #eee6e2);
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill {
+	.modal-body .base-unit-view .base-tables .base-skill1 {
 		margin: 0 0 12px 0;
 		border: 1px solid #847d58;
 		outline: 2px solid #c5b080;
@@ -188,7 +188,7 @@
 		background: linear-gradient(to bottom, #ffffff, #ffffe6);
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header {
 		display: flex;
 		align-items: center;
 		padding: 4px 12px;
@@ -196,7 +196,7 @@
 		background-image: linear-gradient(to bottom, #fffefb, #eee6e2);
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .type h4 {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .type h4 {
 		color: #ffffff;
 		font-size: 12px;
 		font-weight: bold;
@@ -205,21 +205,21 @@
 		background-color: #323232;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .title {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .title {
 		flex: 3;
 		margin: 0 0 0 12px;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .title h3 {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .title h3 {
 		font-size: 14px;
 		font-weight: 700;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .title p {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .title p {
 		font-size: 10px;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .speed {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .speed {
 		flex: 1;
 		font-size: 12px;
 		font-weight: 400;
@@ -227,7 +227,7 @@
 		margin: 0 12px 0 0;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .chakra {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .chakra {
 		color: #56cde7;
 		font-size: 12px;
 		font-weight: bold;
@@ -241,7 +241,7 @@
 		box-shadow: 0 0 0 1px 2px #826837;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .header .chakra:before {
+	.modal-body .base-unit-view .base-tables .base-skill1 .header .chakra:before {
 		content: "";
 		position: absolute;
 		top: 3px; left: 11px;
@@ -251,11 +251,11 @@
 		box-shadow: 0 0 8px 2px rgba(0,204,255,0.8);
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .description {
+	.modal-body .base-unit-view .base-tables .base-skill1 .description {
 		padding: 4px 12px;
 	}
 
-	.modal-body .base-unit-view .base-tables .base-skill .description p {
+	.modal-body .base-unit-view .base-tables .base-skill1 .description p {
 		font-size: 12px;
 	}
 

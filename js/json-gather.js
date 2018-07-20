@@ -84,8 +84,8 @@
 				for(var x in window.chara){
 					if(cid == window.chara[x]['id']){
 						$('#icon-unit').attr('src', 'common/icon/img_icon_' + window.chara[x]['assetid'] + '.png');
-						$('#card-art-star').attr('src', 'common/full/img_card_' + window.chara[x]['assetid'] + '.png');
-						$('#card-art-pvp-star').attr('src', 'common/full/img_card_' + window.chara[x]['assetid'] + '.png');
+						$('#unit-art').attr('src', 'common/full/img_card_' + window.chara[x]['assetid'] + '.png');
+						$('#unit-art-pvp').attr('src', 'common/full/img_card_' + window.chara[x]['assetid'] + '.png');
 
 						$('#type-unit').attr('src', 'common/type/' + window.chara[x]['type'] + '.png');
 						$('#name-unit').text(window.chara[x]['name'] + ', ' + window.chara[x]['subname']);
@@ -123,6 +123,7 @@
 						$('#skill1cost').text((window.chara[x]['hit1']));
 						$('#skill1cost-pvp').text((window.chara[x]['hit2']));
 
+						if(window.chara[x]['skill2'] != ''){
 						$('#skill2name').text(window.chara[x]['skill2']);
 						$('#skill2name-pvp').text(window.chara[x]['skill2']);
 						$('#skill2').text(window.chara[x]['skill2desc']);
@@ -131,6 +132,10 @@
 						$('#skill2type-pvp').text((window.chara[x]['chakra']*2));
 						$('#skill2cost').text((window.chara[x]['hit2']));
 						$('#skill2cost-pvp').text((window.chara[x]['hit2']));
+						}
+						else {
+							$('.base-skill2').css('display:none;') 
+						}
 
 						$('#ability1').text(window.chara[x]['field']);
 						$('#ability2').text(window.chara[x]['buddy']);
