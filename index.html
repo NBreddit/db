@@ -1,99 +1,364 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="nb">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Naruto Blazing Unit Database</title>
 
-    <head>
+  <!--FAVICON-->
+  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 
-        <meta charset="utf-8">
-        <meta name="description" itemprop="description" content="One Piece Treasure Cruise Character Table">
-        <meta name="author" content="Solaris, Zeenigami, and Mondfischer">
-        <meta name="keywords" content="OPTC, One Piece Treasure Cruise, Database, Calculator, Guides, Help, Walkthroughs, Tutorials">
+  <!--BOOTSTRAP -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-        <title>One Piece Treasure Cruise Character Table</title>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="css/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/modal.css"/>
+  <link rel="stylesheet" href="https://i.icomoon.io/public/adb54f46d6/Linearicons/style.css">
 
-        <link href='//fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
-        <link rel="search" href="//nbreddit.github.io/db/opensearch.xml"
-            type="application/opensearchdescription+xml" title="OPTC Character Table">
+  <!-- DATABASE ENTRIES -->
+  <script type="text/javascript" src="common/json/chara.js"></script>
+  <script type="text/javascript" src="common/json/ability.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="common/libs/css/animate.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/datatables.min.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/angular-chart.min.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/ion.rangeSlider.min.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/ngDialog.min.css" />
-        <link rel="stylesheet" type="text/css" href="common/libs/css/ngDialog-theme-default.min.css" />
+  <style>
+  tr{cursor: pointer;}
+</style>
 
-        <link rel="stylesheet" type="text/css" href="common/css/links.css" />
+</head>
 
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="css/edgy.css" ng-if="nightMode" />
+<body>
+  <!-- MODAL -->
+  <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <div class="modal-header">
+          <div class="row">
+            <div class="col-md-9 col-xs-6">
+              <div class="unit-icon">
+                <img id="icon-unit" src="">
+              </div>
+              <img id="type-unit" src="">
+              <h3 id="name-unit"></h3>
+              &emsp;
+            </div>
+            <div class="col-md-3 col-xs-6">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
 
-        <script src="common/libs/js/es5-shim.min.js"></script>
-        <script src="common/libs/js/jquery.min.js"></script>
-        <script src="common/libs/js/angular.min.js"></script>
-        <script src="common/libs/js/angular-ui-router.min.js"></script>
-        <script src="common/libs/js/bootstrap.min.js"></script>
-        <script src="common/libs/js/jquery.noty.packaged.min.js"></script>
-        <script src="common/libs/js/ui-bootstrap-tpls.min.js"></script>
+        <div class="modal-body">
+          <div class="base-unit-view">
 
-        <script src="common/libs/js/angular-sanitize.min.js"></script>
-        <script src="common/libs/js/datatables.min.js"></script>
-        <script src="common/libs/js/typeahead.bundle.min.js"></script>
-        <script src="common/libs/js/fuse.min.js"></script>
-        <script src="common/libs/js/angular-chart.min.js"></script>
-        <script src="common/libs/js/ion.rangeSlider.min.js"></script>
-        <script src="common/libs/js/ngDialog.min.js"></script>
+            <div class="base-toggle">
+              <a class="toggle-rarity" id="toggleRarity"></a>
+            </div>
 
-        <script src="common/data/units.js"></script>
-        <script src="common/data/aliases.js"></script>
-        <script src="common/data/details.js"></script>
-        <script src="common/data/cooldowns.js"></script>
-        <script src="common/data/evolutions.js"></script>
-        <script src="common/data/flags.js"></script>
-        <script src="common/data/drops.js"></script>
-        <script src="common/data/tandems.js"></script>
-        <script src="common/data/families.js"></script>
-        <script src="common/data/matchers.js"></script>
-        <script src="common/data/gw.js"></script>
-        <script src="common/data/version.js"></script>
+            <div class="content-rarity">
 
-        <script src="common/js/utils.js"></script>
+              <div id="five-star">
+                <div class="row">
+                  <div class="img-unit">
+                    <img id="card-art-star" src="">
+                  </div>
+                  <div class="base-tables">
+                    <div class="row">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="skills">
 
-        <script src="js/index.js"></script>
-        <script src="js/states.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/directives.js"></script>
-        <script src="js/table.js"></script>
-        <script src="js/utils.js"></script>
+                          <div id='extra'>
+                            <blockquote><b>How to obtain: </b><span id="obtained"></span></blockquote>
+                          </div>
 
-        <script src="common/js/directives.js"></script>
-        <script src="common/js/services.js"></script>
-        <!--<script src="common/js/error.js"></script>-->
-        <script src="common/js/dismissal.js"></script>
+                          <h2>Stats</h2>
+                          <div id="status"></div>
 
-    </head>
 
-    <body>
+                          <h2>Skills</h2>
+                          <div id="ability">
+                            <div class="base-ability">
+                              <div class="header">
+                                <div class="type">
+                                  <h4>Field Skill</h4>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="ability1"></p>
+                              </div>
+                            </div>
+                            <div class="base-ability">
+                              <div class="header">
+                                <div class="type">
+                                  <h4>Buddy Skill</h4>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="ability2"></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
-        <div class="popup" ui-view="popup" ng-class="{ visible: currentState != 'main.search' }"></div>
+                          <h2>Jutsus</h2>
+                          <div class="base-skill">
+                            <div class="header">
+                              <div class="type">
+                                <h4 id="skill1type"></h4>
+                              </div>
+                              <div class="title">
+                                <h3 id="skill1name"></h3>
+                                <p id="skill1ogname"></p>
+                              </div>
+                              <div class="speed">
+                                <p id="skill1speed"></p>
+                              </div>
+                              <div class="chakra">
+                                <p id="skill1cost"></p>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p id="skill1"></p>
+                            </div>
+                          </div>
+                          <div class="base-skill">
+                            <div class="header">
+                              <div class="type">
+                                <h4 id="skill2type"></h4>
+                              </div>
+                              <div class="title">
+                                <h3 id="skill2name"></h3>
+                                <p id="skill2ogname"></p>
+                              </div>
+                              <div class="speed">
+                                <p id="skill2speed"></p>
+                              </div>
+                              <div class="chakra">
+                                <p id="skill2cost"></p>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p id="skill2"></p>
+                            </div>
+                          </div>
 
-        <div id="mainContainer" ui-view></div>
+                        <h2>Abilities</h2>
+                        <div id="chara-ability"></div>
 
-        <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-         })
-        (window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-73715806-1', 'auto');
-        ga('send', 'pageview', '/characters');
-        </script>
+                        <h2>Sync Skills</h2>
+                        <div id="sync"></div>
 
-        <error-report></error-report>
-        <link-button exclude="characters"></link-button>
 
-    </body>
+                        <h2>Awakening Materials</h2>
+                        <div id="evo">
+                          <img id="evo1" src="">
+                          <img id="evo2" src="">
+                          <img id="evo3" src="">
+                          <img id="evo4" src="">
+                          <img id="evo5" src="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-</html>
+              <div id="pvp">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="img-unit">
+                      <img id="card-art-pvp-star" src="">
+                    </div>
+                  </div>
+                  <div class="base-tables">
+                    <div class="row">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="skills-pvp">
+                          <h2>Jutsu</h2>
+                          <div class="base-skill">
+                            <div class="header">
+                              <div class="type">
+                                <h4 id="skill1type-pvp"></h4>
+                              </div>
+                              <div class="title">
+                                <h3 id="skill1name-pvp"></h3>
+                                <p id="skill1ogname-pvp"></p>
+                              </div>
+                              <div class="speed">
+                                <p id="skill1speed-pvp"></p>
+                              </div>
+                              <div class="chakra">
+                                <p id="skill1cost-pvp"></p>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p id="skill1-pvp"></p>
+                            </div>
+                          </div>
+                          <div class="base-skill">
+                            <div class="header">
+                              <div class="type">
+                                <h4 id="skill2type-pvp"></h4>
+                              </div>
+                              <div class="title">
+                                <h3 id="skill2name-pvp"></h3>
+                                <p id="skill2ogname-pvp"></p>
+                              </div>
+                              <div class="speed">
+                                <p id="skill2speed-pvp"></p>
+                              </div>
+                              <div class="chakra">
+                                <p id="skill2cost-pvp"></p>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p id="skill2-pvp"></p>
+                            </div>
+                          </div>
+                          <h2>Skills</h2>
+                          <div class="base-ability">
+                            <div class="header">
+                              <div class="type">
+                                <h4>Field Skill</h4>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p id="ability1-pvp"></p>
+                            </div>
+                          </div>
+                          <div class="base-ability">
+                            <div class="header">
+                              <div class="type">
+                                <h4>Buddy Skill</h4>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p id="ability2-pvp"></p>
+                            </div>
+                          </div>
+                          <h2>Stats<h2>
+                            <div id="status-pvp">
+                            </div>
+
+                            <h2>Abilities<h2>
+                              <div id="chara-ability-pvp">
+
+                              </div>
+
+                              <h2>Sync</h2>
+                              <div id="sync-pvp">
+
+                              </div>
+                              <h2>Evolution<h2>
+                                <div id="evo-pvp">
+                                  <img id="evo1-pvp" src="">
+                                  <img id="evo2-pvp" src="">
+                                  <img id="evo3-pvp" src="">
+                                  <img id="evo4-pvp" src="">
+                                  <img id="evo5-pvp" src="">
+                                </div>
+                                <div id='extra'>
+                                  <p>Obtained:<strong id="obtained-pvp"></strong></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- MODAL -->
+
+        <div class="container">
+          <div class="base-header">
+            <div class="row">
+              <div class="col-md-5 col-md-offset-7">
+                <h1>Naruto Blazing Unit Database</h1>
+                <p>Want to report a bug or give feedback? Join our <a target="_blank" href="https://discord.gg/pYYHBwt">Discord</a></p>
+              </div>
+              <div class="col-md-12">
+                <div class="base-menu">
+                  <ul>
+                    <li><a href="https://www.reddit.com/r/NarutoBlazing" role="button">Subreddit</a>
+                      <li><a href="https://nbreddit.github.io/#" role="button">Set user flair for subreddit</a>
+
+                        <!-- <li><a href="/guides" role="button">Guides</a>
+                        <li><a href="/faq" role="button">FAQ</a> -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="container">
+              <div class="base-content">
+                <div class="row">
+                  <div class="col-md-12">
+                    <table id="myTable" class="display" cellspacing="0" width="100%">
+                      <tbody class="cards">
+                        <!--
+                        <tr class="clickable" data-toggle="modal" data-target="#newModal">      <td class="text-center">243</td>      <td class="text-center"><img id="icon-table" src="common/icon/img_icon_00003.png"height="60px" width="60px" /></td>      <td class="text-left"><a href= "view/243" data-toggle="modal" data-target="#newModal">Hinata Hyuga, Blooming Talent</a></td>      <td class="text-center"><img id="icon-table" src="common/type/hrt.png" /></div></td>      <td class="text-center"><img id="icon-table" src="common/affi/leaf.png" /></div></td>      <td class="text-center">60</td>      <td class="text-center"><img id="icon-table" src="common/rarity/6.png" /></div></td>      <td class="text-center">3</td>      <td class="text-center">mid</td>      <td class="text-center">1604</td>      <td class="text-center">1234</td></tr>
+                      -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="footer">
+                    <hr>
+                    <p class="note">Maintained by antonlabz</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- JQUERY -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <!--BOOTSTRAP-->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+            <!--SCRIPTS-->
+            <script type="text/javascript" src="js/change-rarity.js"></script>
+
+            <!--JSON GATHER -->
+            <script type="text/javascript" src="js/json-gather.js"></script>
+
+            <!-- TABLE GENERATOR -->
+            <script type="text/javascript" src="js/datatables.min.js"></script>
+
+            <script type="text/javascript" src="js/table.js"></script>
+            <script>
+            $('#newModal').on('hidden.bs.modal', function (e) {
+              $(this).find(‘.modal-dialog’).empty();
+            })
+          </script>
+
+        </body>
+        </html>
