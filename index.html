@@ -37,6 +37,28 @@
   <!-- DATABASE ENTRIES -->
   <script type="text/javascript" src="common/json/chara.js"></script>
   <script type="text/javascript" src="common/json/ability.js"></script>
+  <script type="text/javascript" src="common/json/abilities.js"></script>
+  <script type="text/javascript" src="common/json/evo.js"></script>
+  <script type="text/javascript" src="common/json/obtain.js"></script>
+  <script type="text/javascript" src="common/json/alias.js"></script>
+  <script type="text/javascript" src="common/json/sync.js"></script>
+
+  <!-- JQUERY -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <!--BOOTSTRAP-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!--SCRIPTS-->
+  <script type="text/javascript" src="js/change-rarity.js"></script>
+
+  <!--JSON GATHER -->
+  <script type="text/javascript" src="js/json-gather.js"></script>
+
+  <!-- TABLE GENERATOR -->
+  <script type="text/javascript" src="js/datatables.min.js"></script>
+
+  <script type="text/javascript" src="js/table.js"></script>
 
   <style>
   tr{cursor: pointer;}
@@ -77,7 +99,7 @@
 
             <div class="content-rarity">
 
-              <div id="five-star">
+              <div id="pve" class="active">
                 <div class="row">
                   <div class="img-unit">
                     <img id="unit-art" src="">
@@ -94,6 +116,14 @@
                           <h2>Stats</h2>
                           <div id="status"></div>
 
+                          <h2>Awakening Materials</h2>
+                          <div id="evo">
+                            <img id="evo1" src="">
+                            <img id="evo2" src="">
+                            <img id="evo3" src="">
+                            <img id="evo4" src="">
+                            <img id="evo5" src="">
+                          </div>
 
                           <h2>Skills</h2>
                           <div id="ability">
@@ -104,7 +134,7 @@
                                 </div>
                               </div>
                               <div class="description">
-                                <p id="ability1"></p>
+                                <p id="field"></p>
                               </div>
                             </div>
                             <div class="base-ability">
@@ -114,51 +144,43 @@
                                 </div>
                               </div>
                               <div class="description">
-                                <p id="ability2"></p>
+                                <p id="buddy"></p>
                               </div>
                             </div>
                           </div>
                         </div>
 
                           <h2>Jutsu</h2>
-                          <div class="base-skill1">
+                          <div class="jutsu">
                             <div class="header">
                               <div class="type">
-                                <h4 id="skill1type"></h4>
+                                <h4 id="jutsutype"></h4>
                               </div>
                               <div class="title">
-                                <h3 id="skill1name"></h3>
-                                <p id="skill1ogname"></p>
-                              </div>
-                              <div class="speed">
-                                <p id="skill1speed"></p>
+                                <h3 id="jutsuname"></h3>
                               </div>
                               <div class="chakra">
-                                <p id="skill1cost"></p>
+                                <p id="jutsucost"></p>
                               </div>
                             </div>
                             <div class="description">
-                              <p id="skill1"></p>
+                              <p id="jutsu"></p>
                             </div>
                           </div>
-                          <div class="base-skill2">
+                          <div class="ult">
                             <div class="header">
                               <div class="type">
-                                <h4 id="skill2type"></h4>
+                                <h4 id="ulttype"></h4>
                               </div>
                               <div class="title">
-                                <h3 id="skill2name"></h3>
-                                <p id="skill2ogname"></p>
-                              </div>
-                              <div class="speed">
-                                <p id="skill2speed"></p>
+                                <h3 id="ultname"></h3>
                               </div>
                               <div class="chakra">
-                                <p id="skill2cost"></p>
+                                <p id="ultcost"></p>
                               </div>
                             </div>
                             <div class="description">
-                              <p id="skill2"></p>
+                              <p id="ult"></p>
                             </div>
                           </div>
 
@@ -166,120 +188,154 @@
                         <div id="chara-ability"></div>
 
                         <h2>Sync Skills</h2>
-                        <div id="sync"></div>
-
-
-                        <h2>Awakening Materials</h2>
-                        <div id="evo">
-                          <img id="evo1" src="">
-                          <img id="evo2" src="">
-                          <img id="evo3" src="">
-                          <img id="evo4" src="">
-                          <img id="evo5" src="">
+                        <div id="sync">
+                          <div class="sync">
+                            <div class="info">
+                              <div class="header">
+                                <div class="title">
+                                  <h3 id="sync-title1"></h3>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="sync-desc1"></p>
+                              </div>
+                              <div class="header">
+                                <div class="title">
+                                  <h3 id="sync-title2"></h3>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="sync-desc2"></p>
+                              </div>
+                              <div class="header">
+                                <div class="title">
+                                  <h3 id="sync-title3"></h3>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="sync-desc3"></p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
+
+
               <div id="pvp">
                 <div class="row">
-                  <div class="col-md-4">
                     <div class="img-unit">
                       <img id="unit-art-pvp" src="">
                     </div>
-                  </div>
+                    <div id="pvp-label"></div>
                   <div class="base-tables">
                     <div class="row">
                       <div class="tab-content">
                         <div class="tab-pane active" id="skills-pvp">
-                          <h2>PVP Jutsu</h2>
-                          <div class="base-skill1">
+
+                          <div id='extra'>
+                            <blockquote><b>How to obtain: </b><span id="obtained-pvp"></span></blockquote>
+                          </div>
+
+                          <h2>PvP Stats</h2>
+                            <div id="status-pvp"></div>
+
+                            <h2>PvP Skills</h2>
+                            <div class="base-ability">
+                              <div class="header">
+                                <div class="type">
+                                  <h4>Field Skill</h4>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="field-pvp"></p>
+                              </div>
+                            </div>
+                            <div class="base-ability">
+                              <div class="header">
+                                <div class="type">
+                                  <h4>Buddy Skill</h4>
+                                </div>
+                              </div>
+                              <div class="description">
+                                <p id="buddy-pvp"></p>
+                              </div>
+                            </div>
+
+                          <h2>PvP Jutsu</h2>
+                          <div class="jutsu">
                             <div class="header">
                               <div class="type">
-                                <h4 id="skill1type-pvp"></h4>
+                                <h4 id="jutsutype-pvp"></h4>
                               </div>
                               <div class="title">
-                                <h3 id="skill1name-pvp"></h3>
-                                <p id="skill1ogname-pvp"></p>
-                              </div>
-                              <div class="speed">
-                                <p id="skill1speed-pvp"></p>
+                                <h3 id="jutsuname-pvp"></h3>
                               </div>
                               <div class="chakra">
-                                <p id="skill1cost-pvp"></p>
+                                <p id="jutsucost-pvp"></p>
                               </div>
                             </div>
                             <div class="description">
-                              <p id="skill1-pvp"></p>
+                              <p id="jutsu-pvp"></p>
                             </div>
                           </div>
-                          <div class="base-skill2">
+                          <div class="ult">
                             <div class="header">
                               <div class="type">
-                                <h4 id="skill2type-pvp"></h4>
+                                <h4 id="ulttype-pvp"></h4>
                               </div>
                               <div class="title">
-                                <h3 id="skill2name-pvp"></h3>
-                                <p id="skill2ogname-pvp"></p>
-                              </div>
-                              <div class="speed">
-                                <p id="skill2speed-pvp"></p>
+                                <h3 id="ultname-pvp"></h3>
                               </div>
                               <div class="chakra">
-                                <p id="skill2cost-pvp"></p>
+                                <p id="ultcost-pvp"></p>
                               </div>
                             </div>
                             <div class="description">
-                              <p id="skill2-pvp"></p>
+                              <p id="ult-pvp"></p>
                             </div>
                           </div>
-                          <h2>Skills</h2>
-                          <div class="base-ability">
-                            <div class="header">
-                              <div class="type">
-                                <h4>Field Skill</h4>
-                              </div>
-                            </div>
-                            <div class="description">
-                              <p id="ability1-pvp"></p>
-                            </div>
-                          </div>
-                          <div class="base-ability">
-                            <div class="header">
-                              <div class="type">
-                                <h4>Buddy Skill</h4>
-                              </div>
-                            </div>
-                            <div class="description">
-                              <p id="ability2-pvp"></p>
-                            </div>
-                          </div>
-                          <h2>Stats<h2>
-                            <div id="status-pvp">
-                            </div>
 
-                            <h2>Abilities<h2>
-                              <div id="chara-ability-pvp">
+                            <h2>PvP Abilities</h2>
+                              <div id="chara-ability-pvp"></div>
 
-                              </div>
-
-                              <h2>Sync</h2>
+                              <h2>PvP Sync Skills</h2>
                               <div id="sync-pvp">
-
+                                <div class="sync">
+                                  <div class="info">
+                                    <div class="header">
+                                      <div class="title">
+                                        <h3 id="sync-pvp-title1"></h3>
+                                      </div>
+                                    </div>
+                                    <div class="description">
+                                      <p id="sync-pvp-desc1"></p>
+                                    </div>
+                                    <div class="header">
+                                      <div class="title">
+                                        <h3 id="sync-pvp-title2"></h3>
+                                      </div>
+                                    </div>
+                                    <div class="description">
+                                      <p id="sync-pvp-desc2"></p>
+                                    </div>
+                                    <div class="header">
+                                      <div class="title">
+                                        <h3 id="sync-pvp-title3"></h3>
+                                      </div>
+                                    </div>
+                                    <div class="description">
+                                      <p id="sync-pvp-desc3"></p>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <h2>Evolution<h2>
-                                <div id="evo-pvp">
-                                  <img id="evo1-pvp" src="">
-                                  <img id="evo2-pvp" src="">
-                                  <img id="evo3-pvp" src="">
-                                  <img id="evo4-pvp" src="">
-                                  <img id="evo5-pvp" src="">
-                                </div>
-                                <div id='extra'>
-                                  <p>Obtained:<strong id="obtained-pvp"></strong></p>
-                                </div>
+
                               </div>
                             </div>
                           </div>
@@ -339,21 +395,6 @@
               </div>
             </div>
 
-            <!-- JQUERY -->
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <!--BOOTSTRAP-->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-            <!--SCRIPTS-->
-            <script type="text/javascript" src="js/change-rarity.js"></script>
-
-            <!--JSON GATHER -->
-            <script type="text/javascript" src="js/json-gather.js"></script>
-
-            <!-- TABLE GENERATOR -->
-            <script type="text/javascript" src="js/datatables.min.js"></script>
-
-            <script type="text/javascript" src="js/table.js"></script>
             <script>
             $('#newModal').on('hidden.bs.modal', function (e) {
               $(this).find(‘.modal-dialog’).empty();

@@ -90,63 +90,59 @@
 						$('#type-unit').attr('src', 'common/type/' + window.chara[x]['type'] + '.png');
 						$('#name-unit').text(window.chara[x]['name'] + ', ' + window.chara[x]['subname']);
 
-						if(window.chara[x]['evo1'] != ''){
-							$('#evo1').attr('src', 'common/evo/' + window.chara[x]['evo1'] + '.png');
-							$('#evo1-pvp').attr('src', 'common/evo/' + window.chara[x]['evo1'] + '.png');
+						if(typeof window.evo[x][1] != 'undefined'){
+							$('#evo1').attr('src', 'common/evo/' + window.evo[x][1] + '.png');
+						}
+						if(typeof window.evo[x][2] != 'undefined'){
+							$('#evo2').attr('src', 'common/evo/' + window.evo[x][2] + '.png');
+						}
+						if(typeof window.evo[x][3] != 'undefined'){
+							$('#evo3').attr('src', 'common/evo/' + window.evo[x][3] + '.png');
+						}
+						if(typeof window.evo[x][4] != 'undefined'){
+							$('#evo4').attr('src', 'common/evo/' + window.evo[x][4] + '.png');
+						}
+						if(typeof window.evo[x][5] != 'undefined'){
+							$('#evo5').attr('src', 'common/evo/' + window.evo[x][5] + '.png');
+						}
+						$('#obtained').text(window.obtain[x][1]);
+						$('#obtained-pvp').text(window.obtain[x][1]);
 
-						}
-						if(window.chara[x]['evo2'] != ''){
-							$('#evo2').attr('src', 'common/evo/' + window.chara[x]['evo2'] + '.png');
-							$('#evo2-pvp').attr('src', 'common/evo/' + window.chara[x]['evo2'] + '.png');
-						}
-						if(window.chara[x]['evo3'] != ''){
-							$('#evo3').attr('src', 'common/evo/' + window.chara[x]['evo3'] + '.png');
-							$('#evo3-pvp').attr('src', 'common/evo/' + window.chara[x]['evo3'] + '.png');
-						}
-						if(window.chara[x]['evo4'] != ''){
-							$('#evo4').attr('src', 'common/evo/' + window.chara[x]['evo4'] + '.png');
-							$('#evo4-pvp').attr('src', 'common/evo/' + window.chara[x]['evo4'] + '.png');
-						}
-						if(window.chara[x]['evo5'] != ''){
-							$('#evo5').attr('src', 'common/evo/' + window.chara[x]['evo5'] + '.png');
-							$('#evo5-pvp').attr('src', 'common/evo/' + window.chara[x]['evo5'] + '.png');
-						}
-						$('#obtained').text(window.chara[x]['obtained']);
-						$('#obtained-pvp').text(window.chara[x]['obtained']);
+						$('#jutsuname').text(window.chara[x]['name']);
+						$('#jutsuname-pvp').text(window.chara[x]['jutsu']);
+						$('#jutsu').text(window.chara[x]['jutsudesc']);
+						$('#jutsu-pvp').text(window.chara[x]['jutsupvp']);
+						$('#jutsutype').text(window.chara[x]['chakra']);
+						$('#jutsutype-pvp').text(window.chara[x]['chakra']);
+						$('#jutsucost').text((window.chara[x]['hit1']));
+						$('#jutsucost-pvp').text((window.chara[x]['hit2']));
 
-						$('#skill1name').text(window.chara[x]['name']);
-						$('#skill1name-pvp').text(window.chara[x]['skill1']);
-						$('#skill1').text(window.chara[x]['skill1desc']);
-						$('#skill1-pvp').text(window.chara[x]['skill1pvp']);
-						$('#skill1type').text(window.chara[x]['chakra']);
-						$('#skill1type-pvp').text(window.chara[x]['chakra']);
-						$('#skill1cost').text((window.chara[x]['hit1']));
-						$('#skill1cost-pvp').text((window.chara[x]['hit2']));
+						if(typeof window.chara[x]['ult'] != 'undefined'){
+						$('.ult').css('display','block');
 
-						if(window.chara[x]['skill2'] != ''){
-						$('#skill2name').text(window.chara[x]['skill2']);
-						$('#skill2name-pvp').text(window.chara[x]['skill2']);
-						$('#skill2').text(window.chara[x]['skill2desc']);
-						$('#skill2-pvp').text(window.chara[x]['skill2pvp']);
-						$('#skill2type').text((window.chara[x]['chakra']*2));
-						$('#skill2type-pvp').text((window.chara[x]['chakra']*2));
-						$('#skill2cost').text((window.chara[x]['hit2']));
-						$('#skill2cost-pvp').text((window.chara[x]['hit2']));
-						}
-						else {
-							$('.base-skill2').css('display:none;') 
+						$('#ultname').text(window.chara[x]['ult']);
+						$('#ultname-pvp').text(window.chara[x]['ult']);
+						$('#ult').text(window.chara[x]['ultdesc']);
+						$('#ult-pvp').text(window.chara[x]['ultpvp']);
+						$('#ulttype').text((window.chara[x]['chakra']*2));
+						$('#ulttype-pvp').text((window.chara[x]['chakra']*2));
+						$('#ultcost').text((window.chara[x]['hit2']));
+						$('#ultcost-pvp').text((window.chara[x]['hit2']));
 						}
 
-						$('#ability1').text(window.chara[x]['field']);
-						$('#ability2').text(window.chara[x]['buddy']);
-						$('#ability1-pvp').text(window.chara[x]['field']);
-						$('#ability2-pvp').text(window.chara[x]['buddy']);
+						$('#field').text(window.chara[x]['field']);
+						$('#buddy').text(window.chara[x]['buddy']);
+						$('#field-pvp').text(window.chara[x]['field']);
+						$('#buddy-pvp').text(window.chara[x]['buddy']);
 						var ability = '';
+						var pvpability = '';
 						for(var y = 1; y <= 6; y++){
 							var currentAbility = 'ability' + y;
 							var abilitydesc = checkAbility(window.chara[x], y);
-							if(window.chara[x][currentAbility] != ''){
-								ability += '<div class="base-gear">'
+
+							//Normal abilities
+							if(typeof window.chara[x][currentAbility] != 'undefined'){
+								ability += '<div class="abilities">'
 											+		'<div class="icon">'
 											+			'<img src="common/ability/' + window.chara[x][currentAbility] + '.png" >'
 											+		'</div>'
@@ -158,34 +154,57 @@
 											+'</div>';
 							}
 
-						}
+							//PVP Abilities
+							var currentpvpAbility = 'pvpability' + y;
+							var pvpabilitydesc = checkpvpAbility(window.chara[x], y);
 
-						document.getElementById("chara-ability").innerHTML = ability;
-						document.getElementById("chara-ability-pvp").innerHTML = ability;
-
-						var sync = '';
-						for(var y = 1; y <= 3; y++){
-							var currentSync = 'sync' + y;
-							var syncDesc = ''+ currentSync + 'desc';
-							if(window.chara[x][currentSync] != ''){
-								sync += '<div class="base-gear">'
+							if(typeof window.chara[x][currentpvpAbility] != 'undefined'){
+								pvpability += '<div class="pvp-abilities">'
+											+		'<div class="icon">'
+											+			'<img src="common/ability/' + window.chara[x][currentpvpAbility] + '.png" >'
+											+		'</div>'
 											+		'<div class="info">'
-											+			'<div class="header">'
-											+				'<div class="title">'
-											+					'<h3>' + window.chara[x][currentSync] + '</h3>'
-											+				'</div>'
-											+			'</div>'
 											+		'<div class="description">'
-											+			'<p>' + window.chara[x][syncDesc] + '</p>'
+											+			'<p>' + pvpabilitydesc + '</p>'
 											+		'</div>'
 											+	'</div>'
 											+'</div>';
 							}
-
 						}
 
-						document.getElementById("sync").innerHTML = sync;
-						document.getElementById("sync-pvp").innerHTML = sync;
+						document.getElementById("chara-ability").innerHTML = ability;
+						document.getElementById("chara-ability-pvp").innerHTML = pvpability;
+
+						for(var y = 1; y <= 3; y++){
+							var currentSync = 'sync' + y;
+							var syncDesc = currentSync + 'desc';
+							var syncValue = currentSync + 'value';
+							var syncTemp = window.chara[x][currentSync];
+							var syncDescTemp = window.chara[x][syncDesc];
+
+							//print sync skills
+							if(typeof window.chara[x][currentSync] != 'undefined'){
+								$('#sync-title'+y).text('Sync with ' + window.sync[x][syncTemp]);
+								$('#sync-desc'+y).text(window.sync[x][syncDescTemp] + window.chara[x][syncValue]);
+							}
+
+							var currentpvpSync = 'pvpsync' + y;
+							var pvpsyncDesc = currentpvpSync + 'desc';
+							var pvpsyncValue = currentpvpSync + 'value';
+							var pvpsyncTemp = window.chara[x][currentpvpSync];
+							var pvpsyncDescTemp = window.chara[x][pvpsyncDesc];
+
+							//print pvp sync skills
+							if(typeof window.chara[x][currentpvpSync] != 'undefined'){
+								$('#sync-pvp-title'+y).text('Sync with ' + window.sync[x][pvpsyncTemp]);
+								$('#sync-pvp-desc'+y).text(window.sync[x][pvpsyncDescTemp] + window.chara[x][pvpsyncValue]);
+							}
+							//checks if special pvp sync skill exists, and prints normal one if not
+							else if(typeof window.chara[x][currentSync] != 'undefined' && typeof window.chara[x][currentpvpSync] == 'undefined') {
+								$('#sync-pvp-title'+y).text('Sync with ' + window.sync[x][syncTemp]);
+								$('#sync-pvp-desc'+y).text(window.sync[x][syncDescTemp] + window.chara[x][syncValue]);
+							}
+						}
 
 						var stats ='<table class="table">'
 								+ '<thead>'
@@ -198,28 +217,53 @@
 								+ '</thead>'
 								+ '<tbody>'
 									+ '<tr>'
-										+	'<td>100</td>'
+										+	'<td>' + window.chara[x]['maxlv'] + '</td>'
 										+	'<td id="100-hp">' + window.chara[x]['hp'] + '</td>'
 										+	'<td id="100-atk">' + window.chara[x]['atk'] + '</td>'
 										+	'<td id="100-spd">-</td>'
 									+ '</tr>'
-									+ '<tr>'
+									+ '<tr id="lb">'
 										+ '<td>150</td>'
 										+ '<td id="150-hp">' + window.chara[x]['lbhp'] + '</td>'
 										+ '<td id="150-atk">' + window.chara[x]['lbatk'] + '</td>'
 										+ '<td id="150-spd">-</td>'
 									+ '</tr>'
-									+ '<tr>'
-										+ '<td>PvP</td>'
-										+ '<td id="pvp-hp">' + window.chara[x]['pvphp'] + '</td>'
-										+ '<td id="pvp-atk">' + window.chara[x]['pvpatk'] + '</td>'
-										+ '<td id="pvp-spd">'+ window.chara[x]['pvpspd']+ '</td>'
-									+ '</tr>'
 								+ '</tbody>'
 							+ '</table>';
 
+							var pvpstats ='<table class="table">'
+									+ '<thead>'
+										+ '<tr>'
+											+ '<th>Level</th>'
+											+ '<th>HP</th>'
+											+ '<th>ATK</th>'
+											+ '<th>SPD</th>'
+										+ '</tr>'
+									+ '</thead>'
+									+ '<tbody>'
+										+ '<tr id="pvp-100">'
+											+ '<td>' + window.chara[x]['maxlv'] + '</td>'
+											+ '<td id="pvp-hp">' + window.chara[x]['pvphp'] + '</td>'
+											+ '<td id="pvp-atk">' + window.chara[x]['pvpatk'] + '</td>'
+											+ '<td id="pvp-spd">'+ window.chara[x]['pvpspd']+ '</td>'
+										+ '</tr>'
+										+ '<tr id="pvp-lb">'
+											+ '<td>150</td>'
+											+ '<td id="pvp-hp">' + window.chara[x]['lbpvphp'] + '</td>'
+											+ '<td id="pvp-atk">' + window.chara[x]['lbpvpatk'] + '</td>'
+											+ '<td id="pvp-spd">'+ window.chara[x]['lbpvpspd']+ '</td>'
+										+ '</tr>'
+									+ '</tbody>'
+								+ '</table>';
+
 						document.getElementById("status").innerHTML = stats;
-						document.getElementById("status-pvp").innerHTML = stats;
+						document.getElementById("status-pvp").innerHTML = pvpstats;
+
+						//Hide LB stats if not limitbreakable
+						if (window.chara[x]['limitbreak'] == 0) {
+							$('#lb').css("display","none");
+							$('#pvp-lb').css("display","none");
+						}
 					}
 			}
 		}
@@ -230,11 +274,29 @@
 		name = "ability" + number;
 		desc = name + 'desc';
 		for(var i in window.ability){
-			if(window.ability[i][0] == char[name]){
-				if(window.ability[i][1] == char[desc]){
-					return window.ability[i][2];
-				}
-			}
+			if(window.ability[i].name == char[name]){
+				var level = window.ability[i].levels;
+				 for(var j in level){
+					 if(level[j][0] == char[desc]){
+							 return level[j][1];
+					 }
+				 }
+			 }
+		}
+	}
+
+	function checkpvpAbility(char, number){
+		name = "pvpability" + number;
+		desc = name + 'desc';
+		for(var i in window.ability){
+			if(window.ability[i].name == char[name]){
+				var level2 = window.ability[i].levels;
+				 for(var j in level2){
+					 if(level2[j][0] == char[desc]){
+							 return level2[j][1];
+					 }
+				 }
+			 }
 		}
 	}
 })();
