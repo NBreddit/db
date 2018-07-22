@@ -10,7 +10,7 @@ window.sync = [
     'nonmid': 'all but Mid Range',
     'nonlong': 'all but Long Range',
     'hrt': 'HRT',
-    'skl:' 'SKL',
+    'skl': 'SKL',
     'bod': 'BOD',
     'brv': 'BRV',
     'wis': 'WIS',
