@@ -12,6 +12,18 @@
 			height: 100%;
 	}
 
+	#evo {
+		letter-spacing: 5px;
+	}
+
+	.affi2 {
+		margin-top: 2px;
+	}
+	
+	.affi2[src$="undefined.png"] {
+		display: none;
+	}
+
 	.modal-content h2,
 	.modal-content h3,
 	.modal-content h4,

@@ -1,5 +1,6 @@
 window.sync = [
   {
+    //sync with
     'short': 'Short Range',
     'mid': 'Mid Range',
     'long': 'Long Range',
@@ -34,6 +35,24 @@ window.sync = [
     'ninja': 'Ninja Alliance',
 
     //descriptions
-    'atk': 'Boosts ATK by '
+    'atk': 'Boosts ATK by [x]',
+    'sub': 'Ignores Substitution when attacking',
+    'crit': 'Boosts critical rate by [x]x',
+    'dmg-red': 'Reduces damage taken by [x]%',
+    'hp-heal': 'Restores [x] HP every turn',
+    'dodge': '[x]% chance of dodging an attack (Not Slip Damage)',
+    'hrt-red': 'Reduces damage from HRT enemies by [x]%',
+    'skl-red': 'Reduces damage from SKL enemies by [x]%',
+    'bod-red': 'Reduces damage from BOD enemies by [x]%',
+    'brv-red': 'Reduces damage from BRV enemies by [x]%',
+    'wis-red': 'Reduces damage from WIS enemies by [x]%',
+    'multi-up': 'Increases multiplier of both jutsus by [x]',
+    'atkdown-red': 'Lowers chance of receiving ATK reduction by [x]%',
+    'immob-red': 'Lowers chance of being immobilized by [x]%',
+    'seal-red': 'Lowers chance of being jutsu sealed by [x]%',
+    'slip-red': 'Lowers chance of receiving slip damage by [x]%',
+    'hpseal-red': 'Lowers chance of being HP recovery sealed by [x]%',
+    'immob-null': 'Nullifies Immobilization (Excluding Field Effects and F Skills)',
+    'jutsu-null': 'Nullifies Jutsu Sealing (Excluding Field Effects and F Skills)'
   }
 ]

@@ -1,13 +1,13 @@
 (function(){
 
-	function _createCard(id, asset, name, type, affi, cost, rare, chakra, range, hp, atk){
+	function _createCard(id, asset, name, type, affi1, affi2, cost, rare, chakra, range, hp, atk){
 		//Create Entries in the Table
 		var model = '<tr class="clickable" data-toggle="modal" data-target="#newModal">'
                     +'      <td class="text-center">' + id + '</td>'
                     +'      <td class="text-center"><img id="icon-table" src="common/icon/img_icon_' + asset + '.png" height="60px" width="60px" /></td>'
                     +'      <td class="text-center"><a href= "view/' + id + '" data-toggle="modal" data-target="#newModal">' + name + '</a></td>'
                     +'      <td class="text-center"><img id="icon-table" src="common/type/' + type + '.png" /></div></td>'
-                    +'      <td class="text-center"><img id="icon-table" src="common/affi/' + affi + '.png" /></div></td>'
+                    +'      <td class="text-center"><img id="icon-table" src="common/affi/' + affi1 + '.png" /><img class="affi2" src="common/affi/' + affi2 + '.png"></div></td>'
                     +'      <td class="text-center">' + cost + '</td>'
                     +'      <td class="text-center"><img id="icon-table" src="common/rarity/' + rare + '.png" /></div></td>'
                     +'      <td class="text-center">' + chakra + '</td>'
@@ -33,7 +33,9 @@
 			var asset = unit['assetid'];
 			var name = unit['name'] + ", " + unit['subname'];
 			var type = unit['type'];
-			var affi = unit['affi'];
+			var affi = unit['affi'].split(',');
+			var affi1 = affi[0];
+			var affi2 = affi[1];
 			var cost = unit['cost'];
 			var rare = unit['rarity'];
 			var chakra = unit['chakra'];
@@ -43,7 +45,7 @@
 
 			if(units.indexOf(chara[0]) == -1){
 				units.push(unit[0]);
-				content += _createCard(id, asset, name, type, affi, cost, rare, chakra, range, hp, atk);
+				content += _createCard(id, asset, name, type, affi1, affi2, cost, rare, chakra, range, hp, atk);
 			}
 		}
 
@@ -130,25 +132,44 @@
 						$('#ultcost-pvp').text((window.chara[x]['hit2']));
 						}
 
-						$('#field').text(window.chara[x]['field']);
-						$('#buddy').text(window.chara[x]['buddy']);
-						$('#field-pvp').text(window.chara[x]['field']);
-						$('#buddy-pvp').text(window.chara[x]['buddy']);
+						//FIELD SKILL
+						var field = window.chara[x]['field'];
+						var fieldvalue = window.chara[x]['fieldvalue'];
+
+						var field1 = window.fb[0][field].replace('[x]', fieldvalue);
+
+						$('#field').text(field1);
+						$('#field-pvp').text(field1);
+
+						//BUDDY SKILL
+						var buddy = window.chara[x]['buddy'];
+						var buddyvalue = window.chara[x]['buddyvalue'];
+
+						var buddy1 = window.fb[0][buddy].replace('[x]', buddyvalue);
+						$('#buddy').text(buddy1);
+						$('#buddy-pvp').text(buddy1);
+
+						//ABILITIES
 						var ability = '';
 						var pvpability = '';
 						for(var y = 1; y <= 6; y++){
 							var currentAbility = 'ability' + y;
-							var abilitydesc = checkAbility(window.chara[x], y);
+							var abilitydesc = currentAbility + 'desc';
 
 							//Normal abilities
 							if(typeof window.chara[x][currentAbility] != 'undefined'){
+								var abilityName1 = window.chara[x][currentAbility];
+								var abilityName2 = window.ability[0][abilityName1];
+								var abilityValue = window.chara[x][abilitydesc];
+								var ability1 = abilityName2.replace('[x]', abilityValue);
+
 								ability += '<div class="abilities">'
 											+		'<div class="icon">'
 											+			'<img src="common/ability/' + window.chara[x][currentAbility] + '.png" >'
 											+		'</div>'
 											+		'<div class="info">'
 											+		'<div class="description">'
-											+			'<p>' + abilitydesc + '</p>'
+											+			'<p>' + ability1 + '</p>'
 											+		'</div>'
 											+	'</div>'
 											+'</div>';
@@ -156,16 +177,34 @@
 
 							//PVP Abilities
 							var currentpvpAbility = 'pvpability' + y;
-							var pvpabilitydesc = checkpvpAbility(window.chara[x], y);
+							var pvpabilitydesc = currentpvpAbility + 'desc';
 
 							if(typeof window.chara[x][currentpvpAbility] != 'undefined'){
+								var pvpabilityName1 = window.chara[x][currentpvpAbility];
+								var pvpabilityName2 = window.ability[0][pvpabilityName1];
+								var pvpabilityValue = window.chara[x][pvpabilitydesc];
+								var pvpability1 = pvpabilityName2.replace('[x]', pvpabilityValue);
+
 								pvpability += '<div class="pvp-abilities">'
 											+		'<div class="icon">'
 											+			'<img src="common/ability/' + window.chara[x][currentpvpAbility] + '.png" >'
 											+		'</div>'
 											+		'<div class="info">'
 											+		'<div class="description">'
-											+			'<p>' + pvpabilitydesc + '</p>'
+											+			'<p>' + pvpability1 + '</p>'
+											+		'</div>'
+											+	'</div>'
+											+'</div>';
+							}
+							//checks if special pvp sync skill exists, and prints normal one if not
+							else if(typeof window.chara[x][currentAbility] != 'undefined' && typeof window.chara[x][currentpvpAbility] == 'undefined') {
+								pvpability += '<div class="pvp-abilities">'
+											+		'<div class="icon">'
+											+			'<img src="common/ability/' + window.chara[x][currentAbility] + '.png" >'
+											+		'</div>'
+											+		'<div class="info">'
+											+		'<div class="description">'
+											+			'<p>' + ability1 + '</p>'
 											+		'</div>'
 											+	'</div>'
 											+'</div>';
@@ -184,8 +223,11 @@
 
 							//print sync skills
 							if(typeof window.chara[x][currentSync] != 'undefined'){
-								$('#sync-title'+y).text('Sync with ' + window.sync[x][syncTemp]);
-								$('#sync-desc'+y).text(window.sync[x][syncDescTemp] + window.chara[x][syncValue]);
+								var syncx = window.sync[0][syncDescTemp];
+								var syncy = syncx.replace('[x]', window.chara[x][syncValue]);
+
+								$('#sync-title'+y).text('Sync with ' + window.sync[0][syncTemp]);
+								$('#sync-desc'+y).text(syncy);
 							}
 
 							var currentpvpSync = 'pvpsync' + y;
@@ -196,13 +238,16 @@
 
 							//print pvp sync skills
 							if(typeof window.chara[x][currentpvpSync] != 'undefined'){
-								$('#sync-pvp-title'+y).text('Sync with ' + window.sync[x][pvpsyncTemp]);
-								$('#sync-pvp-desc'+y).text(window.sync[x][pvpsyncDescTemp] + window.chara[x][pvpsyncValue]);
+								var pvpsyncx = window.sync[0][pvpsyncDescTemp];
+								var pvpsyncy = pvpsyncx.replace('[x]', window.chara[x][pvpsyncValue]);
+
+								$('#sync-pvp-title'+y).text('Sync with ' + window.sync[0][pvpsyncTemp]);
+								$('#sync-pvp-desc'+y).text(pvpsyncy);
 							}
 							//checks if special pvp sync skill exists, and prints normal one if not
 							else if(typeof window.chara[x][currentSync] != 'undefined' && typeof window.chara[x][currentpvpSync] == 'undefined') {
-								$('#sync-pvp-title'+y).text('Sync with ' + window.sync[x][syncTemp]);
-								$('#sync-pvp-desc'+y).text(window.sync[x][syncDescTemp] + window.chara[x][syncValue]);
+								$('#sync-pvp-title'+y).text('Sync with ' + window.sync[0][syncTemp]);
+								$('#sync-pvp-desc'+y).text(syncy);
 							}
 						}
 
@@ -266,37 +311,6 @@
 						}
 					}
 			}
-		}
-
-	}
-
-	function checkAbility(char, number){
-		name = "ability" + number;
-		desc = name + 'desc';
-		for(var i in window.ability){
-			if(window.ability[i].name == char[name]){
-				var level = window.ability[i].levels;
-				 for(var j in level){
-					 if(level[j][0] == char[desc]){
-							 return level[j][1];
-					 }
-				 }
-			 }
-		}
-	}
-
-	function checkpvpAbility(char, number){
-		name = "pvpability" + number;
-		desc = name + 'desc';
-		for(var i in window.ability){
-			if(window.ability[i].name == char[name]){
-				var level2 = window.ability[i].levels;
-				 for(var j in level2){
-					 if(level2[j][0] == char[desc]){
-							 return level2[j][1];
-					 }
-				 }
-			 }
 		}
 	}
 })();
